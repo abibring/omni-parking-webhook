@@ -1,10 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 const QRCode = require('qrcode');
-const dotenv = require('dotenv');
 const nodemailer = require('nodemailer');
 // const { Redis } = require('@upstash/redis');
-dotenv.config();
 
 // const redis = new Redis({
 //   url: process.env.UPSTASH_REDIS_REST_URL,
