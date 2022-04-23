@@ -3,13 +3,13 @@
 const QRCode = require('qrcode');
 const dotenv = require('dotenv');
 const nodemailer = require('nodemailer');
-const { Redis } = require('@upstash/redis');
+// const { Redis } = require('@upstash/redis');
 dotenv.config();
 
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN
-});
+// const redis = new Redis({
+//   url: process.env.UPSTASH_REDIS_REST_URL,
+//   token: process.env.UPSTASH_REDIS_REST_TOKEN
+// });
 
 const transporter = nodemailer.createTransport({
   port: 465,
@@ -89,11 +89,11 @@ export default async function handler(req, res) {
     // }
     // method to add members
     // redis.sadd(`webhook${}`)
-    const members = await redis.smembers();
-    members.forEach(member => {
+    // const members = await redis.smembers();
+    // members.forEach(member => {
       // if (memb)
       // check ids to see if webhook exists
-    });
+    // });
     // If webhook_id does not already exist in db
     // if (!webhookExists) {
       // Establish variables for email
