@@ -1,9 +1,15 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 const QRCode = require('qrcode');
-// const dotenv = require('dotenv');
+const dotenv = require('dotenv');
 const nodemailer = require('nodemailer');
-// dotenv.config();
+const { Redis } = require('@upstash/redis');
+dotenv.config();
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN
+});
 
 const transporter = nodemailer.createTransport({
   port: 465,
@@ -27,12 +33,18 @@ async function generateQRCode(text) {
 
 export default async function handler(req, res) {
   // res.status(200).json({ name: 'John Doe' })
+
   try {
+    if (req.METHOD === 'POST') {
+    
+    }
     // Grab needed data from reqeest object
     const { body: payload, headers } = req;
     const { email: to, order_number, customer, line_items, created_at, total_line_items_price } = payload;
     const { first_name, last_name } = customer;
     const startAndEndTimes = line_items && line_items[0] && line_items[0].properties || []; // start and end times should be here
+
+   
 
     // set headers
     res.setHeader('Content-Type', 'text/html');
@@ -75,10 +87,15 @@ export default async function handler(req, res) {
     //     }
     //   }
     // }
-  
+    // method to add members
+    // redis.sadd(`webhook${}`)
+    const members = await redis.smembers();
+    members.forEach(member => {
+      // if (memb)
+      // check ids to see if webhook exists
+    });
     // If webhook_id does not already exist in db
     // if (!webhookExists) {
-    //   await req.db.collection('webhooks').insertOne({ webhook_id: new_webhook_id, total_items, time }); // save webhook
       // Establish variables for email
       const from = 'omniparkingwebhook@gmail.com'; // sender
       const text = 'Thank you for your order. Please use the barcode attached to enter the parking lot.'; // backup text if html fails
