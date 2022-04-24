@@ -63,10 +63,10 @@ export default async function handler(req, res) {
     if (req.METHOD === 'POST') {
     // Grab needed data from reqeest object
     const { body: payload, headers } = req;
-    const { email: to, order_number, customer, line_items, created_at, total_line_items_price } = payload;
+    const { /*email: to, */ order_number, customer, line_items, created_at, total_line_items_price } = payload;
     const { first_name, last_name } = customer;
     const startAndEndTimes = line_items && line_items[0] && line_items[0].properties || []; // start and end times should be here    
-    
+    const to = 'alon.bibring@gmail.com';
         // set headers
         res.setHeader('Content-Type', 'text/html');
         // describes lifetime of our resource telling CDN to serve from cache and update in background (at most once per second)
@@ -74,7 +74,7 @@ export default async function handler(req, res) {
     
         console.log('\n\npayload:', payload, '\n\n');
         console.log('\n\nlines_items[0].properties', startAndEndTimes, '\n\n');
-        console.log('\n\ncustomeer:', customer, '\n\n')
+        console.log('\n\ncustomer:', customer, '\n\n')
         console.log('\n\order_number:', order_number, '\n\n');
         console.log('\n\nline_items', line_items, '\n\n');
     
