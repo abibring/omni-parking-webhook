@@ -101,9 +101,9 @@ export default async function handler(req, res) {
       const cc = ['alon.bibring@gmail.com']; // cc emails
       const mailData = { from, to, cc, subject, text, html }; // Establish Email Configuration Options
       try {
-        await transporter.sendMail(mailData); // send email to user using nodemailer
+        // await transporter.sendMail(mailData); // send email to user using nodemailer
       } catch (e) {
-        await transporter.sendMail(mailData); // send email to user using nodemailer
+        // await transporter.sendMail(mailData); // send email to user using nodemailer
       }
     // }
 
